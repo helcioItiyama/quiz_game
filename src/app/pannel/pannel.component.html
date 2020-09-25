@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-sm-6">
+        <app-progress></app-progress>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="d-flex justify-content-end">
+          <app-try></app-try>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h6>{{ instructions }}</h6>
+        <p>{{ phraseTurn.phraseEng }}</p>
+
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            rows="3"
+            (input)="updateResponse($event)"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="d-flex justify-content-end">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="verifyResponse()"
+          >Verificar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
