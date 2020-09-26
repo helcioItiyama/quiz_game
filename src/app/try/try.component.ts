@@ -1,17 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Heart } from '../shared/heart.model';
 
 @Component({
   selector: 'app-try',
   templateUrl: './try.component.html',
   styleUrls: ['./try.component.css']
 })
-export class TryComponent implements OnInit {
-  public emptyHeart: string = "/assets/coracao_vazio.png";
-  public fullHeart: string = "/assets/coracao_cheio.png";
+export class TryComponent implements OnInit, OnChanges {
+  @Input() public tries:number;
 
-  constructor() { }
+  public hearts: Heart[] = [
+    new Heart(true),
+    new Heart(true),
+    new Heart(true)
+  ];
+
+  constructor() {
+    console.log(this.hearts)
+  };
+
+  ngOnChanges() {
+    console.log('mudou ' + this.tries);
+  };
 
   ngOnInit() {
-  }
-
+  };
 }

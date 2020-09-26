@@ -10,13 +10,14 @@ import { Phrases } from './phrase-mock';
 export class PannelComponent implements OnInit {
   public instructions: string = "Traduza a frase:";
   public phrases: Phrase[] = Phrases;
-  public response: string;
+  public response: string = '';
   public turn: number = 0;
+  public tries: number = 3;
   public phraseTurn: Phrase;
   public progress: number = 0;
 
   constructor() {
-    this.phraseTurn = this.phrases[this.turn];
+    this.updateTurn();
    };
 
   ngOnInit() {
@@ -34,11 +35,22 @@ export class PannelComponent implements OnInit {
 
       this.progress += (100 / this.phrases.length);
 
-      this.phraseTurn = this.phrases[this.turn];
-      console.log(this.progress)
+      this.updateTurn();
+
     } else {
       alert('A tradução está errada');
+      this.response = '';
+      this.tries--
+
+      if(this.tries === -1) {
+        alert('Você usou todas as tentativas disponíveis');
+      }
     }
   };
+
+  public updateTurn(): void {
+    this.phraseTurn = this.phrases[this.turn];
+    this.response = '';
+  }
 
 }

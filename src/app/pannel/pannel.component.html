@@ -2,12 +2,12 @@
   <div class="jumbotron">
     <div class="row">
       <div class="col-sm-6">
-        <app-progress></app-progress>
+        <app-progress [progress]="progress"></app-progress>
       </div>
 
       <div class="col-sm-6">
         <div class="d-flex justify-content-end">
-          <app-try></app-try>
+          <app-try [tries]="tries"></app-try>
         </div>
       </div>
     </div>
@@ -22,6 +22,7 @@
             class="form-control"
             rows="3"
             (input)="updateResponse($event)"
+            [value]="response"
           ></textarea>
         </div>
       </div>
@@ -34,7 +35,9 @@
             type="button"
             class="btn btn-primary"
             (click)="verifyResponse()"
-          >Verificar</button>
+          >
+            Verificar
+          </button>
         </div>
       </div>
     </div>
