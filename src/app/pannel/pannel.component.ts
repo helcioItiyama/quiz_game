@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Phrase } from '../shared/phrase.model';
 import { Phrases } from './phrase-mock';
 
@@ -15,6 +15,7 @@ export class PannelComponent implements OnInit {
   public tries: number = 3;
   public phraseTurn: Phrase;
   public progress: number = 0;
+  @Output() public gameOver: EventEmitter<string> = new EventEmitter();
 
   constructor() {
     this.updateTurn();
@@ -29,21 +30,23 @@ export class PannelComponent implements OnInit {
 
   public verifyResponse():void {
     if(this.response === this.phraseTurn.phrasePtBr) {
-      alert('A tradução está correta');
 
       this.turn++
 
       this.progress += (100 / this.phrases.length);
 
+      if(this.turn === 4) {
+        this.gameOver.emit('victory');
+      }
+
       this.updateTurn();
 
     } else {
-      alert('A tradução está errada');
       this.response = '';
       this.tries--
 
       if(this.tries === -1) {
-        alert('Você usou todas as tentativas disponíveis');
+        this.gameOver.emit('failure');
       }
     }
   };

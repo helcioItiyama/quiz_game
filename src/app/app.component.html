@@ -1,3 +1,28 @@
 <app-head></app-head>
-<app-pannel></app-pannel>
+
+<div *ngIf="gameOnPlay; else endOfGame">
+  <app-pannel (gameOver)="gameOver($event)"></app-pannel>
+</div>
+
+<ng-template #endOfGame>
+  <div *ngIf="typeEnding==='failure'; else victory" class="container" style="margin-top: 50px">
+    <div class="row">
+      <div class="col">
+        <h3 style="color: red">Fim de jogo, infelizmente você perdeu :(</h3>
+        <button class="btn btn-primary" (click)="playAgain()">Tentar novamente</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #victory>
+  <div class="container" style="margin-top: 50px">
+    <div class="row">
+      <div class="col">
+        <h3 style="color: green">Fim de jogo, você venceu!! :)</h3>
+        <button class="btn btn-primary" (click)="playAgain()">Tentar novamente</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
 

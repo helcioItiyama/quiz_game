@@ -20,7 +20,10 @@ export class TryComponent implements OnInit, OnChanges {
   };
 
   ngOnChanges() {
-    console.log('mudou ' + this.tries);
+    if(this.tries !== this.hearts.length) {
+      let index = this.hearts.length - this.tries;
+      this.hearts[index - 1].isFull = false;
+    }
   };
 
   ngOnInit() {
